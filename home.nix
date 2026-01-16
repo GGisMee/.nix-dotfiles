@@ -53,6 +53,11 @@
 
   # Niri Konfiguration
   wayland.windowManager.niri.settings = {
+    input = {
+      keyboard.xkb.layout = "se";
+    };
+
+
     # Autostart: Bakgrund + Notiser
     spawn-at-startup = [
       { command = [ "swww-daemon" ]; }
@@ -64,15 +69,13 @@
       "Super+D".action.spawn = [ "fuzzel" ];
       "Super+L".action.spawn = [ "hyprlock" ];
       "Super+T".action.spawn "kitty";
-      "Super+Q".action = "close-window";
+      "Super+Q".action.close-window = {};
+      "Super+Shift+E".action.quit = {};
       
     };
 
     # Layout & Design
     layout = {
-      keyboard = {
-        xkb.layout = "se";
-      };
       gaps = 10;
       center-focused-column = "never";
     };
