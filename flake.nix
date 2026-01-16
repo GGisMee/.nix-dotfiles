@@ -7,9 +7,13 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    niri-flake = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows="nixpkgs";
+    };
 
   };
-  outputs = {self, nixpkgs, nixpkgs_unstable, home-manager, ...}:
+  outputs = {self, nixpkgs, nixpkgs_unstable, home-manager, niri-flake, ...} @ inputs:
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
@@ -28,7 +32,9 @@
     homeConfigurations = {
       gustav = home-manager.lib.homeManagerConfiguration {
         inherit pkgs; # Som input = input.
-	modules = [ ./home.nix ];
+	modules = [ 
+	  niri-flake.homeModules.niri
+	./home.nix ];
 	extraSpecialArgs = {
           inherit pkgs-unstable;
 	};

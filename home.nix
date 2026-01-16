@@ -12,8 +12,10 @@
 
   programs.git = {
     enable = true;
-    user.name = "gustavg";
-    user.email = "gustav.gamstedt@outlook.com";
+    settings.user = {
+      name = "gustavg";
+      email = "gustav.gamstedt@outlook.com";
+    };
     extraConfig.init.defaultBranch = "main"; # bra att ha skriven, kan annars komma onödiga felmeddelanden.
   };
 
@@ -49,7 +51,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
-
+  # programs.niri.enable = true;
   # Niri Konfiguration
   wayland.windowManager.niri.settings = {
     input = {
@@ -67,9 +69,9 @@
     binds = {
       "Super+D".action.spawn = [ "fuzzel" ];
       "Super+L".action.spawn = [ "hyprlock" ];
-      "Super+T".action.spawn = "kitty";
-      "Super+Q".action.close-window = {};
-      "Super+Shift+E".action.quit = {};
+      "Super+T".action.spawn = [ "kitty" ];
+      "Super+Q".action.close-window = [];
+      "Super+Shift+E".action.quit = [];
       
     };
 
