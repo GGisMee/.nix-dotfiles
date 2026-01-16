@@ -23,7 +23,7 @@
     nixosConfigurations = {
       gustav = lib.nixosSystem {
         inherit system;
-	modules = [ ./modules/system/configuration.nix ];
+	modules = [ ./system/configuration.nix ];
 	specialArgs = {
           inherit pkgs-unstable;
 	};
@@ -34,7 +34,7 @@
         inherit pkgs; # Som input = input.
 	modules = [ 
 	  niri-flake.homeModules.niri
-	./modules/home/home.nix ];
+	./home/home.nix ];
 	extraSpecialArgs = {
           inherit pkgs-unstable;
 	};
