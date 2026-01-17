@@ -34,7 +34,7 @@
         inherit pkgs; # Som input = input.
 	modules = [ 
 	  niri-flake.homeModules.niri
-	./home/home.nix ];
+	./home.nix ];
 	extraSpecialArgs = {
           inherit pkgs-unstable;
 	};
