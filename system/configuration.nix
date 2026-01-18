@@ -78,7 +78,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.gustav = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "video" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
               tree
               obsidian
@@ -99,9 +99,9 @@
     kitty # terminal
     htop
     git
-    wl-clipboard
     ssh-askpass-fullscreen
     python3
+    wl-clipboard
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

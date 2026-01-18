@@ -30,10 +30,17 @@
 	  # The home.packages option allows you to install Nix packages into your
 	  # environment.
 	  home.packages = with pkgs; [
-	    fuzzel
+	    fuzzel # open app
 	    swaynotificationcenter
-	    hyprlock
+	    hyprlock # lockscreen
 	    swww
+
+	    brightnessctl
+	    grim # screenshots
+	    slurp # selecting regions for grim
+	    wl-clipboard # copy pasting
+
+
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
 
