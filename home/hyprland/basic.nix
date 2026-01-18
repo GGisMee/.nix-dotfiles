@@ -13,8 +13,8 @@
 
 	  "$mod, Q, killactive,"
 
-	  "mod Shift, Escape, exec, systemctl poweroff"
-	  "mod, Escape, Escape, systemctl suspend"
+	  "$mod Shift, Escape, exec, systemctl poweroff"
+	  "$mod, Escape, exec, systemctl suspend"
 	];
       };
   };
