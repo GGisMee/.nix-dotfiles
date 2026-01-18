@@ -53,11 +53,12 @@
   services.displayManager = {
     sddm.enable = true;
     sddm.wayland.enable = true;
-    defaultSession = "niri";
+    # defaultSession = "niri";
   };
   hardware.graphics.enable = true;
 
-  programs.niri.enable = true;
+  # programs.niri.enable = true;
+  programs.hyprland.enable = true;
 
   # Enable sound.
   services.pipewire = {
