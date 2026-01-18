@@ -37,6 +37,12 @@
     layout = "se";
     variant = "";
 	};
+
+
+  services.udev.extraRules = ''
+    KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+  '';
+  hardware.uinput.enable = true;
   # Använder kanata programmet som helt enkelt mappar caps till shift+ctrl+super+alt
   services.kanata = {
   enable = true;
@@ -92,7 +98,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.gustav = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "video" "input" "uinput"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
               tree
               obsidian
