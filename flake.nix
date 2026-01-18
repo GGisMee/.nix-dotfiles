@@ -35,7 +35,6 @@
         inherit pkgs; # Som input = input.
 	modules = [ 
 	hyprland.homeManagerModules.default
-	  # niri-flake.homeModules.niri
 	./home.nix ];
 	extraSpecialArgs = {
           inherit pkgs-unstable;
