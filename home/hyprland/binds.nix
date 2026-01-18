@@ -4,18 +4,33 @@
     settings = {
       input = {
         kb_layout = "se";
-	follow_mouse = 1;
+	follow_mouse = 0; # klicka på fönster för att aktivera
 	};
+
 	"$mod" = "SUPER";
+	"$caps" = "CONTROL_SHIFT_ALT_SUPER"; # kort för remap caps till dessa
 	bind = [
 	  # Apps
-	  "$mod, D, exec, fuzzel"
+	  "$mod, $mod_L, exec, pkill fuzzel || fuzzel"
 	  "$mod, T, exec, kitty"
 	  "$mod, B, exec, firefox"
-
+	  "$mod, N, exec, obsidian"
 
 	  # Shortcut keys
 	  "$mod, Q, killactive,"
+	  "$mod, V, togglefloating,"
+
+	  # Change windows
+	  "$mod, h, movefocus, l"
+	  "$mod, l, movefocus, r"
+	  "$mod, k, movefocus, u"
+	  "$mod, j, movefocus, d"
+
+	  # Move window
+	  "$mod SHIFT, h,  movewindow, l"
+	  "$mod SHIFT, l, movewindow, r"
+	  "$mod SHIFT, k,    movewindow, u"
+	  "$mod SHIFT, j,  movewindow, d"
 
 	  "$mod Shift, Escape, exec, systemctl poweroff"
 	  "$mod, Escape, exec, systemctl suspend"

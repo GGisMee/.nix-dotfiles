@@ -36,9 +36,18 @@
   services.xserver.xkb = {
     layout = "se";
     variant = "";
-    options = "caps:escape";
 	};
-
+  # Använder kanata programmet som helt enkelt mappar caps till shift+ctrl+super+alt
+  services.kanata = {
+  enable = true;
+  keyboards.default = {
+    config = ''
+      (defsrc caps)
+      (defalias hyper (multi lctl lmet lalt lshift))
+      (deflayer base @hyper)
+    '';
+  };
+};
   # display manager
   
   # Cosmic stuff
