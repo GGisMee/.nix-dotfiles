@@ -1,6 +1,6 @@
 {
   imports = [
-    ./basic.nix
+    ./binds.nix
 
   ];
 
