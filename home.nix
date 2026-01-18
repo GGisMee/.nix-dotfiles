@@ -34,6 +34,7 @@
 	    swaynotificationcenter
 	    hyprlock # lockscreen
 	    swww
+	    waybar
 
 	    brightnessctl
 	    grim # screenshots

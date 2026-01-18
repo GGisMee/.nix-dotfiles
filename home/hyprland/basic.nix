@@ -8,15 +8,20 @@
 	};
 	"$mod" = "SUPER";
 	bind = [
+	  # Apps
 	  "$mod, D, exec, fuzzel"
 	  "$mod, T, exec, kitty"
+	  "$mod, B, exec, firefox"
 
+
+	  # Shortcut keys
 	  "$mod, Q, killactive,"
 
 	  "$mod Shift, Escape, exec, systemctl poweroff"
 	  "$mod, Escape, exec, systemctl suspend"
 
-	  
+	  # Screenshot
+	  "$mod Shift, S, exec, grim -g \"$(slurp)\" - | wl-copy || pkill grim"
 	];
 	binde = [
 # Ljudvolym (Wireplumber)

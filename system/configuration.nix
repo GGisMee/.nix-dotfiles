@@ -57,6 +57,11 @@
   };
   hardware.graphics.enable = true;
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-hyprland ];
+  };
+
   # programs.niri.enable = true;
   programs.hyprland.enable = true;
 
