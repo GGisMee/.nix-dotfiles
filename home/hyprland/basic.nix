@@ -9,8 +9,7 @@
 
 	bind = [
 	  "SUPER, R, exec, fuzzel"
-
-	]
+	];
       };
   };
 }
