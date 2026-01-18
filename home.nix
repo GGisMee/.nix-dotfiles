@@ -31,9 +31,9 @@
 	  # environment.
 	  home.packages = with pkgs; [
 	    fuzzel
-    swaynotificationcenter
-    hyprlock
-    swww
+	    swaynotificationcenter
+	    hyprlock
+	    swww
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
 
