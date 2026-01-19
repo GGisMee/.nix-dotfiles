@@ -22,12 +22,6 @@
 	  # The home.packages option allows you to install Nix packages into your
 	  # environment.
 
-	  programs.kitty = {
-	    enable = true;
-	    settings = {
-	      confirm_os_window_close = 0;
-	    };
-	  };
 	
 	  home.sessionVariables = {
 	    NIXOS_OZONE_WL = "1";

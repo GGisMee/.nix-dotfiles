@@ -100,7 +100,6 @@
     extraGroups = [ "wheel" "video" "input" "uinput"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
-      obsidian
       spotify
       (pkgs.vscode-with-extensions.override {
        vscode = pkgs.vscode.override {
