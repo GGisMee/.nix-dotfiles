@@ -3,7 +3,6 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, ... }:
-
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -36,9 +35,24 @@
   services.xserver.xkb = {
     layout = "se";
     variant = "";
-    options = "caps:escape";
 	};
 
+
+  services.udev.extraRules = ''
+    KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+  '';
+  hardware.uinput.enable = true;
+  # Använder kanata programmet som helt enkelt mappar caps till shift+ctrl+super+alt
+  services.kanata = {
+  enable = true;
+  keyboards.default = {
+    config = ''
+      (defsrc caps)
+      (defalias hyper (multi lctl lmet lalt lshift))
+      (deflayer base @hyper)
+    '';
+  };
+};
   # display manager
   
   # Cosmic stuff
@@ -53,11 +67,17 @@
   services.displayManager = {
     sddm.enable = true;
     sddm.wayland.enable = true;
-    defaultSession = "niri";
+    # defaultSession = "niri";
   };
   hardware.graphics.enable = true;
 
-  programs.niri.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-hyprland ];
+  };
+
+  # programs.niri.enable = true;
+  programs.hyprland.enable = true;
 
   # Enable sound.
   services.pipewire = {
@@ -77,12 +97,20 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.gustav = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "video" "input" "uinput"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-              tree
-              obsidian
-	      spotify
-	      vscode
+      tree
+      obsidian
+      spotify
+      (pkgs.vscode-with-extensions.override {
+       vscode = pkgs.vscode.override {
+       commandLineArgs = [
+       "--enable-features=UseOzonePlatform"
+       "--ozone-platform=wayland"
+       "--force-device-scale-factor=1"
+       ];
+       };
+       })
     ];
   };
   nixpkgs.config.allowUnfree = true;
@@ -98,9 +126,9 @@
     kitty # terminal
     htop
     git
-    wl-clipboard
     ssh-askpass-fullscreen
     python3
+    wl-clipboard
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

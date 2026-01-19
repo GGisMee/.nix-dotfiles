@@ -1,8 +1,7 @@
 {
   imports = [
-    ./niri
-
-
+    ./hyprland
+    ./nvim
   ];
 
 }

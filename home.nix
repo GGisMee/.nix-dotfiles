@@ -1,39 +1,59 @@
-{ config, pkgs, ... }:
-{
+	{ config, pkgs, ... }:
+	{
 
-  imports = [
-    ./home # filer i home foldern
-  ];
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "gustav";
-  home.homeDirectory = "/home/gustav";
+	  imports = [
+	    ./home # filer i home foldern
+	  ];
+	  # Home Manager needs a bit of information about you and the paths it should
+	  # manage.
+	  home.username = "gustav";
+	  home.homeDirectory = "/home/gustav";
 
-  programs.git = {
-    enable = true;
-    settings.user = {
-      name = "gustavg";
-      email = "gustav.gamstedt@outlook.com";
-    };
-    settings.init.defaultBranch = "main"; # bra att ha skriven, kan annars komma onödiga felmeddelanden.
-  };
+	  programs.git = {
+	    enable = true;
+	    settings.user = {
+	      name = "gustavg";
+	      email = "gustav.gamstedt@outlook.com";
+	    };
+	    settings.init.defaultBranch = "main"; # bra att ha skriven, kan annars komma onödiga felmeddelanden.
+	  };
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "25.11"; # Please read the comment before changing.
+	  # This value determines the Home Manager release that your configuration is
+	  # compatible with. This helps avoid breakage when a new Home Manager release
+	  # introduces backwards incompatible changes.
+	  #
+	  # You should not change this value, even if you update Home Manager. If you do
+	  # want to update the value, then make sure to first check the Home Manager
+	  # release notes.
+	  home.stateVersion = "25.11"; # Please read the comment before changing.
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = with pkgs; [
-    fuzzel
-    swaynotificationcenter
-    hyprlock
-    swww
+	  # The home.packages option allows you to install Nix packages into your
+	  # environment.
+
+	  programs.kitty = {
+	    enable = true;
+	    settings = {
+	      confirm_os_window_close = 0;
+	    };
+	  };
+	
+	  home.sessionVariables = {
+	    NIXOS_OZONE_WL = "1";
+	  };
+
+	  home.packages = with pkgs; [
+	    fuzzel # open app
+	    swaynotificationcenter
+	    hyprlock # lockscreen
+	    swww
+	    waybar
+
+	    brightnessctl
+	    grim # screenshots
+	    slurp # selecting regions for grim
+	    wl-clipboard # copy pasting
+
+
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
 
