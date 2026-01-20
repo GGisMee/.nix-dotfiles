@@ -7,6 +7,10 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Spotify but cli
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
     # niri-flake = {
     #  url = "github:sodiboo/niri-flake";
     #   inputs.nixpkgs.follows="nixpkgs";
@@ -14,12 +18,18 @@
     # hyprland.url = "github:hyprwm/Hyprland";
 
   };
-  outputs = {self, nixpkgs, nixpkgs_unstable, home-manager, ...} @ inputs:
+  outputs = {self, nixpkgs, nixpkgs_unstable, home-manager, spicetify-nix, ...} @ inputs:
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
-      pkgs = nixpkgs.legacyPackages.${system};
-      pkgs-unstable = nixpkgs_unstable.legacyPackages.${system};
+      pkgs = import nixpkgs {
+	inherit system;
+	config.allowUnfree = true;
+      };
+      pkgs-unstable = import nixpkgs_unstable {
+        inherit system;
+	config.allowUnfree = true;
+      };
     in {
     nixosConfigurations = {
       gustav = lib.nixosSystem {
@@ -35,9 +45,10 @@
         inherit pkgs; # Som input = input.
 	modules = [ 
 	# hyprland.homeManagerModules.default
+	spicetify-nix.homeManagerModules.default
 	./home.nix ];
 	extraSpecialArgs = {
-          inherit pkgs-unstable;
+          inherit pkgs-unstable inputs;
 	};
       };
     };
