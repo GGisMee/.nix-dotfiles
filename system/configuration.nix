@@ -23,6 +23,11 @@
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
 
+  # Stylus settings
+  services.xserver.wacom.enable = true;
+  # boot.kernalPackages = pkgs.linuxPackages_latest;
+  hardware.enableAllFirmware = true;
+
   # Time zone
   time.timeZone = "Europe/Stockholm";
 
