@@ -25,6 +25,9 @@
 	
 	  home.sessionVariables = {
 	    NIXOS_OZONE_WL = "1";
+	    NIXOS_OZONE_GFX_PLATFORM = "wayland";
+	    QT_QPA_PLATFORM = "wayland";
+	    GDK_BACKEND = "wayland";
 	  };
 
 
@@ -44,6 +47,7 @@
 
 	    obsidian
 	    google-chrome
+	    vscode
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
