@@ -7,6 +7,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./caps-kanata.nix
     ];
 
   # Enable flakes
@@ -47,17 +48,6 @@
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
   '';
   hardware.uinput.enable = true;
-  # Använder kanata programmet som helt enkelt mappar caps till shift+ctrl+super+alt
-  services.kanata = {
-  enable = true;
-  keyboards.default = {
-    config = ''
-      (defsrc caps)
-      (defalias hyper (multi lctl lmet lalt lshift))
-      (deflayer base @hyper)
-    '';
-  };
-};
   
   services.displayManager = {
     sddm.enable = true;
@@ -120,6 +110,7 @@
     ssh-askpass-fullscreen
     python3
     wl-clipboard
+    kanata # for rebinding caps
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

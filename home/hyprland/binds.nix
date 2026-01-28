@@ -6,7 +6,7 @@
 
       dwindle = {
       preserve_split = true;
-      force_split = 1;
+      force_split = 2;
       };
     input = {
       kb_layout = "se";
