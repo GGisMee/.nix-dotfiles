@@ -6,6 +6,7 @@
     ./mouse.nix
     ./monitor.nix
     ./stylix.nix
+    ./exec-once.nix
   ];
 
    # Removes default background for custom choices
