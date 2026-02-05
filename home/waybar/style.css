@@ -1,0 +1,42 @@
+/* Grunden för alla moduler till höger */
+#pulseaudio,
+#battery,
+#network,
+#cpu,
+#memory,
+#clock {
+    background-color: @base01; /* Mörkare box-bakgrund */
+    color: @base05;
+    border-radius: 8px;
+    padding: 0 12px;
+    margin: 4px 4px; /* Skapar mellanrum mellan boxarna */
+    border: 1px solid @base02;
+}
+
+/* Specifik färg för batteri när det är lågt */
+#battery.warning {
+    color: @base0A; /* Gul/Orange */
+}
+
+#battery.critical:not(.charging) {
+    background-color: @base08; /* Röd bakgrund */
+    color: @base00;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Separera workspaces i egna boxar*/
+#workspaces button {
+    background: @base01;
+    margin: 4px 2px;
+    border-radius: 8px;
+    color: @base05;
+}
+
+#workspaces button.active {
+    background: @base0D; /* Accentfärg */
+    color: @base00;
+}

@@ -3,11 +3,11 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, ... }:
-
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./keyboard-kanata.nix
     ];
 
   # Enable flakes
@@ -24,6 +24,11 @@
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
 
+  # Stylus settings
+  services.xserver.wacom.enable = true;
+  # boot.kernalPackages = pkgs.linuxPackages_latest;
+  hardware.enableAllFirmware = true;
+
   # Time zone
   time.timeZone = "Europe/Stockholm";
 
@@ -36,28 +41,24 @@
   services.xserver.xkb = {
     layout = "se";
     variant = "";
-    options = "caps:escape";
 	};
 
-  # display manager
-  
-  # Cosmic stuff
-  # services.displayManager.cosmic-greeter.enable = true;
-  # services.desktopManager.cosmic.enable = true;
-
-  # Gammalt
-  # services.xserver.enable = true;
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
+  hardware.uinput.enable = true;
   
   services.displayManager = {
     sddm.enable = true;
     sddm.wayland.enable = true;
-    defaultSession = "niri";
+    # defaultSession = "niri";
   };
   hardware.graphics.enable = true;
 
-  programs.niri.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-hyprland ];
+  };
+
+  # programs.niri.enable = true;
+  programs.hyprland.enable = true;
 
   # Enable sound.
   services.pipewire = {
@@ -74,21 +75,27 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
+  nix.settings.trusted-users = [ "roots" "gustav"];
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.gustav = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "video" "input" "uinput"]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-              tree
-              obsidian
-	      spotify
-	      vscode
+      tree
     ];
   };
   nixpkgs.config.allowUnfree = true;
-  programs.firefox.enable = true;
-  programs.steam.enable = true;
-
+  programs.steam = {
+    enable = true;
+    package = pkgs.steam.override {
+      extraBwrapArgs = [ "--setenv GDK_DPI_SCALE 1.5" ]; 
+    };
+  };
+  environment.variables = {
+    # Fix for unproperly scaled apps
+    NIXOS_OZONE_WL = "1";
+  };
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
@@ -96,11 +103,14 @@
     vim
     wget
     kitty # terminal
-    htop
     git
-    wl-clipboard
+    git-lfs
     ssh-askpass-fullscreen
     python3
+    devenv # venv but nix
+    wl-clipboard
+    kanata # for rebinding caps
+
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
