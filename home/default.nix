@@ -11,5 +11,6 @@
     ./mouse.nix
     ./exec-once.nix
     ./monitor.nix
+    # ./kc_keyboard_on.nix
   ];
 }

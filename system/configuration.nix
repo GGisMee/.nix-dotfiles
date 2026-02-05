@@ -7,7 +7,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./caps-kanata.nix
+      ./keyboard-kanata.nix
     ];
 
   # Enable flakes
