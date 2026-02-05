@@ -7,23 +7,36 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri-flake = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows="nixpkgs";
+
+    stylix = {
+      url = "github:danth/stylix/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Spotify but cli
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = {self, nixpkgs, nixpkgs_unstable, home-manager, niri-flake, ...} @ inputs:
+  outputs = {self, nixpkgs, nixpkgs_unstable, home-manager, spicetify-nix, stylix, ...} @ inputs:
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
-      pkgs = nixpkgs.legacyPackages.${system};
-      pkgs-unstable = nixpkgs_unstable.legacyPackages.${system};
+      pkgs = import nixpkgs {
+	inherit system;
+	config.allowUnfree = true;
+      };
+      pkgs-unstable = import nixpkgs_unstable {
+        inherit system;
+	config.allowUnfree = true;
+      };
     in {
     nixosConfigurations = {
       gustav = lib.nixosSystem {
         inherit system;
-	modules = [ ./system/configuration.nix ];
+	modules = [ 
+	./system/configuration.nix 
+	stylix.nixosModules.stylix
+	];
 	specialArgs = {
           inherit pkgs-unstable;
 	};
@@ -33,10 +46,12 @@
       gustav = home-manager.lib.homeManagerConfiguration {
         inherit pkgs; # Som input = input.
 	modules = [ 
-	  niri-flake.homeModules.niri
-	./home.nix ];
+	  spicetify-nix.homeManagerModules.default
+	  ./home.nix 
+	  stylix.homeModules.stylix
+	];
 	extraSpecialArgs = {
-          inherit pkgs-unstable;
+          inherit pkgs-unstable inputs;
 	};
       };
     };
