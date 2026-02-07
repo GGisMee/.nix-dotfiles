@@ -57,6 +57,8 @@
 	    vesktop # discord copy
 
 	    (utils.waylandFix vscode "code")
+
+      trash-cli # nice app for handeling trash
   ];
   # programs.niri.enable = true;
   # Fuzzel (Launcher)
